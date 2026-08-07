@@ -1,0 +1,248 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/* Self-hosted fonts (font-display: swap comes from @fontsource) */
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Control-plane design system.
+ * All colours live as CSS custom properties on :root and are exposed to
+ * Tailwind through @theme inline. Never hardcode colours in components.
+ */
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hi: var(--surface-hi);
+  --color-hairline: var(--hairline);
+  --color-text: var(--text);
+  --color-text-dim: var(--text-dim);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-crit: var(--crit);
+  --color-grid: var(--grid);
+
+  /* shadcn-compatible aliases */
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface-hi);
+  --color-popover-foreground: var(--text);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--bg);
+  --color-secondary: var(--surface-hi);
+  --color-secondary-foreground: var(--text);
+  --color-muted: var(--surface-hi);
+  --color-muted-foreground: var(--text-dim);
+  --color-accent-foreground: var(--bg);
+  --color-destructive: var(--crit);
+  --color-destructive-foreground: var(--text);
+  --color-border: var(--hairline);
+  --color-input: var(--hairline);
+  --color-ring: var(--accent);
+
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius-2xl: 4px;
+  --radius-3xl: 4px;
+  --radius-4xl: 4px;
+
+  --ease-plane: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --bg: #0e1116;
+  --surface: #151a21;
+  --surface-hi: #1b2129;
+  --hairline: #262e38;
+  --text: #e7e4dd;
+  --text-dim: #8a94a0;
+  --accent: #f2a93b;
+  --ok: #46b98a;
+  --warn: #f2a93b;
+  --crit: #e0555a;
+  --grid: rgba(255, 255, 255, 0.035);
+  --radius: 4px;
+}
+
+.theme-incident {
+  --bg: #12080a;
+  --surface: #1a0c0f;
+  --hairline: #3a1a1e;
+  --accent: #e0555a;
+  --grid: rgba(224, 85, 90, 0.06);
+}
+
+html,
+body,
+html * {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 600ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Type scale */
+@utility type-display {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 9vw, 8.75rem);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+}
+
+@utility type-section {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4vw, 3.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+@utility type-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+}
+
+@utility type-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+@utility type-data {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility shell {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Scroll reveal */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes plane-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
+@utility pulse-dot {
+  animation: plane-pulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Motion kill-switch (command palette: toggle motion) */
+html.motion-off *,
+html.motion-off *::before,
+html.motion-off *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html.motion-off .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
