@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { GridOverlay } from "@/components/GridOverlay";
 import { LeftRail } from "@/components/LeftRail";
 import { Hero } from "@/components/sections/Hero";
@@ -31,6 +32,7 @@ export function App() {
       <PaletteHint />
       <CommandPalette />
       <Terminal />
+      <SpeedInsights />
     </div>
   );
 }
