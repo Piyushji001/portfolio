@@ -11,6 +11,7 @@ import { Architecture } from "@/components/sections/Architecture";
 import { Endpoints } from "@/components/sections/Endpoints";
 import { CommandPalette, PaletteHint } from "@/components/CommandPalette";
 import { Terminal } from "@/components/Terminal";
+import { CustomCursor } from "@/components/CustomCursor";
 
 const TITLE = "Piyush Sharma — DevOps Engineer";
 const DESCRIPTION =
@@ -78,6 +79,7 @@ function Index() {
       <PaletteHint />
       <CommandPalette />
       <Terminal />
+      <CustomCursor />
     </div>
   );
 }
