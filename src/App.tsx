@@ -1,6 +1,7 @@
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { GridOverlay } from "@/components/GridOverlay";
 import { LeftRail } from "@/components/LeftRail";
+import { MouseSpotlight } from "@/components/MouseSpotlight";
 import { Hero } from "@/components/sections/Hero";
 import { SystemOverview } from "@/components/sections/SystemOverview";
 import { Stack } from "@/components/sections/Stack";
@@ -16,6 +17,7 @@ export function App() {
     <div className="relative min-h-screen bg-bg text-text">
       <GridOverlay />
       <LeftRail />
+      <MouseSpotlight />
 
       <div className="relative z-10 lg:pl-[220px]">
         <main className="shell">
