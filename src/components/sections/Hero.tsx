@@ -167,7 +167,7 @@ export function Hero() {
           <motion.div {...fade()} className="mt-10 flex flex-wrap gap-3">
             <a
               href="#architecture"
-              className="type-data inline-flex items-center rounded-sm border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
+              className="type-data hover-lift inline-flex items-center rounded-sm border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
               style={{
                 borderColor: "var(--accent)",
                 color: "var(--accent)",
@@ -189,7 +189,7 @@ export function Hero() {
             <a
               href={profile.resumeUrl}
               download
-              className="type-data inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
+              className="type-data hover-lift inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
               style={{
                 borderColor: "var(--hairline)",
                 color: "var(--text-dim)",
@@ -212,7 +212,7 @@ export function Hero() {
                 href={profile.linkedin}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="type-data inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
+                className="type-data hover-lift inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
                 style={{
                   borderColor: "var(--hairline)",
                   color: "var(--text-dim)",
@@ -236,7 +236,7 @@ export function Hero() {
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="type-data inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
+                className="type-data hover-lift inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
                 style={{
                   borderColor: "var(--hairline)",
                   color: "var(--text-dim)",

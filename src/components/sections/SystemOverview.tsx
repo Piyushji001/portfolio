@@ -76,7 +76,7 @@ function MetricTile({
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
       tabIndex={0}
-      className="border p-5 transition-colors duration-300"
+      className="border hover-lift p-5 transition-colors duration-300"
       style={{
         backgroundColor: "var(--surface)",
         borderColor: hovered ? "var(--accent)" : "var(--hairline)",

@@ -12,6 +12,7 @@ import { Endpoints } from "@/components/sections/Endpoints";
 import { CommandPalette, PaletteHint } from "@/components/CommandPalette";
 import { Terminal } from "@/components/Terminal";
 import { CustomCursor } from "@/components/CustomCursor";
+import { MouseSpotlight } from "@/components/MouseSpotlight";
 
 const TITLE = "Piyush Sharma — DevOps Engineer";
 const DESCRIPTION =
@@ -80,6 +81,7 @@ function Index() {
       <CommandPalette />
       <Terminal />
       <CustomCursor />
+      <MouseSpotlight />
     </div>
   );
 }

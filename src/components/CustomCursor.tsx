@@ -10,13 +10,9 @@ export function CustomCursor() {
   useEffect(() => {
     if (reduced) return;
 
-    // Check if device supports fine hover (mouse)
-    const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!hasHover) return;
-
     const onMouseMove = (e: MouseEvent) => {
       setPos({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
 
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -39,7 +35,7 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("mouseenter", onMouseEnter);
     };
-  }, [reduced, isVisible]);
+  }, [reduced]);
 
   if (reduced || !isVisible) return null;
 
@@ -50,7 +46,7 @@ export function CustomCursor() {
         className="pointer-events-none fixed top-0 left-0 z-50 rounded-full"
         style={{
           border: `1px solid ${isHovered ? "var(--accent)" : "var(--hairline)"}`,
-          backgroundColor: isHovered ? "rgba(242, 169, 59, 0.08)" : "transparent",
+          backgroundColor: isHovered ? "rgba(242, 169, 59, 0.12)" : "transparent",
         }}
         animate={{
           x: pos.x - (isHovered ? 18 : 12),
@@ -60,9 +56,9 @@ export function CustomCursor() {
         }}
         transition={{
           type: "spring",
-          damping: 28,
-          stiffness: 350,
-          mass: 0.4,
+          damping: 25,
+          stiffness: 400,
+          mass: 0.3,
         }}
       />
 
@@ -80,8 +76,8 @@ export function CustomCursor() {
         }}
         transition={{
           type: "spring",
-          damping: 40,
-          stiffness: 600,
+          damping: 35,
+          stiffness: 700,
           mass: 0.1,
         }}
       />
