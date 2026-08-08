@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function CustomCursor() {
-  const reduced = useReducedMotion();
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (reduced) return;
-
     const onMouseMove = (e: MouseEvent) => {
       setPos({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -35,9 +32,9 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("mouseenter", onMouseEnter);
     };
-  }, [reduced]);
+  }, []);
 
-  if (reduced || !isVisible) return null;
+  if (!isVisible) return null;
 
   return (
     <>
@@ -45,14 +42,14 @@ export function CustomCursor() {
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-50 rounded-full"
         style={{
-          border: `1px solid ${isHovered ? "var(--accent)" : "var(--hairline)"}`,
-          backgroundColor: isHovered ? "rgba(242, 169, 59, 0.12)" : "transparent",
+          border: `1.5px solid ${isHovered ? "var(--accent)" : "rgba(242, 169, 59, 0.6)"}`,
+          backgroundColor: isHovered ? "rgba(242, 169, 59, 0.25)" : "rgba(242, 169, 59, 0.08)",
         }}
         animate={{
-          x: pos.x - (isHovered ? 18 : 12),
-          y: pos.y - (isHovered ? 18 : 12),
-          width: isHovered ? 36 : 24,
-          height: isHovered ? 36 : 24,
+          x: pos.x - (isHovered ? 20 : 14),
+          y: pos.y - (isHovered ? 20 : 14),
+          width: isHovered ? 40 : 28,
+          height: isHovered ? 40 : 28,
         }}
         transition={{
           type: "spring",
@@ -66,13 +63,13 @@ export function CustomCursor() {
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-50 rounded-full"
         style={{
-          backgroundColor: isHovered ? "var(--accent)" : "var(--fg)",
+          backgroundColor: "var(--accent)",
         }}
         animate={{
-          x: pos.x - (isHovered ? 3 : 2),
-          y: pos.y - (isHovered ? 3 : 2),
-          width: isHovered ? 6 : 4,
-          height: isHovered ? 6 : 4,
+          x: pos.x - (isHovered ? 4 : 3),
+          y: pos.y - (isHovered ? 4 : 3),
+          width: isHovered ? 8 : 6,
+          height: isHovered ? 8 : 6,
         }}
         transition={{
           type: "spring",

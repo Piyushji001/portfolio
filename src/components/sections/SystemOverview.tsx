@@ -76,28 +76,35 @@ function MetricTile({
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
       tabIndex={0}
-      className="border hover-lift p-5 transition-colors duration-300"
+      className="border p-5 transition-all duration-300 flex flex-col justify-between"
       style={{
-        backgroundColor: "var(--surface)",
+        backgroundColor: hovered ? "rgba(242, 169, 59, 0.06)" : "var(--surface)",
         borderColor: hovered ? "var(--accent)" : "var(--hairline)",
         borderRadius: "4px",
+        minHeight: "155px",
         transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
       }}
     >
-      <div
-        className="type-data text-[44px] leading-none font-semibold"
-        style={{ color: "var(--accent)" }}
-      >
-        <CountUp value={metric.value} active={active} delay={delay} />
-      </div>
-      <div className="type-data mt-3 text-[11px] tracking-[0.14em] uppercase text-text-dim">
-        {metric.label}
-      </div>
-      {hovered && (
-        <div className="mt-2 text-[12px] leading-snug text-text-dim">
-          {metric.detail}
+      <div>
+        <div
+          className="type-data text-[44px] leading-none font-semibold"
+          style={{ color: "var(--accent)" }}
+        >
+          <CountUp value={metric.value} active={active} delay={delay} />
         </div>
-      )}
+        <div className="type-data mt-3 text-[11px] tracking-[0.14em] uppercase text-text-dim">
+          {metric.label}
+        </div>
+      </div>
+      <div
+        className="mt-3 text-[12px] leading-snug transition-opacity duration-300"
+        style={{
+          color: hovered ? "var(--fg)" : "var(--fg-dim)",
+          opacity: hovered ? 1 : 0.65,
+        }}
+      >
+        {metric.detail}
+      </div>
     </div>
   );
 }

@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 
 export function MouseSpotlight() {
-  const reduced = useReducedMotion();
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    if (reduced) return;
-
     const onMouseMove = (e: MouseEvent) => {
       setPos({ x: e.clientX, y: e.clientY });
     };
@@ -21,16 +17,16 @@ export function MouseSpotlight() {
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [reduced]);
+  }, []);
 
-  if (reduced || !pos) return null;
+  if (!pos) return null;
 
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-20 transition-opacity duration-500"
+      className="pointer-events-none fixed inset-0 z-40 transition-opacity duration-300"
       style={{
-        background: `radial-gradient(550px circle at ${pos.x}px ${pos.y}px, rgba(242, 169, 59, 0.06), transparent 75%)`,
+        background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(242, 169, 59, 0.22), rgba(242, 169, 59, 0.05) 45%, transparent 75%)`,
       }}
     />
   );
