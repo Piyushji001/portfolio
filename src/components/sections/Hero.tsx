@@ -198,13 +198,63 @@ export function Hero() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--text-dim)";
+                e.currentTarget.style.color = "var(--text)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = "var(--hairline)";
+                e.currentTarget.style.color = "var(--text-dim)";
               }}
             >
               {HERO_COPY.secondary}
             </a>
+            {profile.linkedin && (
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="type-data inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
+                style={{
+                  borderColor: "var(--hairline)",
+                  color: "var(--text-dim)",
+                  borderRadius: "4px",
+                  transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--text-dim)";
+                  e.currentTarget.style.color = "var(--text)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--hairline)";
+                  e.currentTarget.style.color = "var(--text-dim)";
+                }}
+              >
+                LINKEDIN
+              </a>
+            )}
+            {profile.github && (
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="type-data inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
+                style={{
+                  borderColor: "var(--hairline)",
+                  color: "var(--text-dim)",
+                  borderRadius: "4px",
+                  transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--text-dim)";
+                  e.currentTarget.style.color = "var(--text)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--hairline)";
+                  e.currentTarget.style.color = "var(--text-dim)";
+                }}
+              >
+                GITHUB
+              </a>
+            )}
           </motion.div>
         )}
       </div>

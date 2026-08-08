@@ -3,26 +3,12 @@ import { useReveal } from "@/hooks/use-reveal";
 import { useUptime } from "@/hooks/use-uptime";
 import { StatusDot } from "@/components/StatusDot";
 
-const LOCATION_VALUE = `${profile.location} · IST (UTC+5:30)`;
-
 type Row = { key: string; value: string; href?: string; download?: boolean };
 
 function rows(): Row[] {
-  const list: Row[] = [
+  return [
     { key: "EMAIL", value: profile.email, href: `mailto:${profile.email}` },
   ];
-  if (profile.linkedin !== "")
-    list.push({ key: "LINKEDIN", value: profile.linkedin, href: profile.linkedin });
-  if (profile.github !== "")
-    list.push({ key: "GITHUB", value: profile.github, href: profile.github });
-  list.push({
-    key: "RESUME",
-    value: profile.resumeUrl.replace(/^\//, ""),
-    href: profile.resumeUrl,
-    download: true,
-  });
-  list.push({ key: "LOCATION", value: LOCATION_VALUE });
-  return list;
 }
 
 function Arrow() {

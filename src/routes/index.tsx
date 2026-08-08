@@ -9,6 +9,7 @@ import { DeploymentLog } from "@/components/sections/DeploymentLog";
 import { IncidentReport } from "@/components/sections/IncidentReport";
 import { Architecture } from "@/components/sections/Architecture";
 import { Endpoints } from "@/components/sections/Endpoints";
+import { Contact } from "@/components/sections/Contact";
 import { CommandPalette, PaletteHint } from "@/components/CommandPalette";
 import { Terminal } from "@/components/Terminal";
 
@@ -72,6 +73,7 @@ function Index() {
           <IncidentReport />
           <Architecture />
           <Endpoints />
+          <Contact />
         </main>
       </div>
 

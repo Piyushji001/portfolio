@@ -14,27 +14,38 @@ function box(x: number, y: number, w = 140): Pos {
 /** Pre-computed layout coordinates keyed by project name and node id */
 const LAYOUT_POS: Record<string, Record<string, Pos>> = {
   "Vistofy.in": {
-    cf: box(250, 0),
-    lb: box(250, 74),
-    fe: box(40, 148),
-    be: box(460, 148),
-    redis: box(340, 222, 130),
-    ai: box(490, 222, 150),
-    loki: box(250, 300),
+    // Row 0 — user entry
+    users:    box(270, 0,   100),
+    // Row 1 — edge / LB
+    lb:       box(170, 74, 170),
+    mongo:    box(510, 0,  150),
+    // Row 2 — GCP compute split
+    fe:       box(10,  148, 140),
+    mig:      box(220, 148, 150),
+    bgremove: box(430, 148, 140),
+    // Row 3 — data / Contabo worker
+    redis:    box(10,  240, 120),
+    storage:  box(200, 240, 140),
+    worker:   box(430, 240, 140),
+    // Row 4 — CI/CD + monitoring
+    github:   box(0,   330, 120),
+    ghcr:     box(140, 330, 80),
+    grafana:  box(500, 330, 110),
   },
   "Multi-Repository CI/CD Infrastructure": {
-    commit: box(0, 0, 90),
-    build: box(110, 0, 90),
-    test: box(220, 0, 90),
-    push: box(330, 0, 90),
+    commit: box(0,   0, 90),
+    build:  box(110, 0, 90),
+    test:   box(220, 0, 90),
+    push:   box(330, 0, 90),
     deploy: box(440, 0, 90),
     health: box(550, 0, 90),
+    notify: box(550, 74, 90),
   },
 };
 
 const VIEWBOX_SIZE: Record<string, { w: number; h: number }> = {
-  "Vistofy.in": { w: 640, h: 340 },
-  "Multi-Repository CI/CD Infrastructure": { w: 640, h: 34 },
+  "Vistofy.in": { w: 660, h: 370 },
+  "Multi-Repository CI/CD Infrastructure": { w: 640, h: 108 },
 };
 
 function edgePath(a: Pos, b: Pos) {

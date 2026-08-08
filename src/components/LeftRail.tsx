@@ -9,7 +9,6 @@ const initials = profile.name
   .split(" ")
   .map((part) => `${part[0]}.`)
   .join("");
-const cityLabel = `${profile.location.split(", ")[0]}, IN`.toUpperCase();
 
 export function LeftRail() {
   const active = useActiveSection(IDS);
@@ -63,7 +62,6 @@ export function LeftRail() {
           <div className="type-data text-[11px] tracking-[0.1em] text-text-dim">
             <LocalClock />
           </div>
-          <div className="type-eyebrow">{cityLabel}</div>
         </div>
       </aside>
     </>

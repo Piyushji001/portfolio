@@ -6,8 +6,8 @@ export const profile = {
   timezone: "Asia/Kolkata",
   careerStart: "2025-01-01",
   email: "mr.piyush0270@gmail.com",
-  linkedin: "",   // TODO(human): paste LinkedIn URL before build
-  github: "",     // TODO(human): paste GitHub URL before build
+  linkedin: "https://www.linkedin.com/in/piyush-sharma-devops/",
+  github: "https://github.com/Piyushji001",
   resumeUrl: "/Piyush_Sharma_Resume_DevOps.pdf",
   bio: "I build and run the infrastructure other people's products sit on. Multi-cloud across AWS, Azure and GCP, containerised with Docker and Kubernetes, shipped through CI/CD pipelines I design and own. I lead a small development team, run client-facing technical discussions, and I've cut a cloud bill by 60% and recovered a compromised AWS account in four hours.",
 };
@@ -28,6 +28,7 @@ export const stack = [
   { layer: "Network & Sec", items: ["NGINX", "Cloudflare", "UFW", "SSL/TLS", "Linux hardening", "Secrets management", "IAM & access controls"] },
   { layer: "Runtime",       items: ["Python", "FastAPI", "Bash", "Node.js", "Express.js", "React", "JavaScript (ES6+)"] },
   { layer: "Data",          items: ["MongoDB", "MySQL", "Redis"] },
+  { layer: "AI & Automation", items: ["ChatGPT", "Claude", "Ollama (self-hosted)", "LLM-assisted scripting", "AI-integrated CI/CD", "Automated PR review"] },
 ];
 
 export const experience = [
@@ -67,21 +68,22 @@ export const incident = {
   id: "INC-2026-001",
   severity: "SEV-1",
   title: "AWS account compromise",
-  summary: "Leaked IAM access keys were used to spin up unauthorised compute across multiple AWS regions. Detected, contained and fully restored in under four hours.",
+  summary: "Leaked IAM access keys triggered unauthorised compute across nearly every AWS region. A Lambda-based kill switch swept the blast radius, every fraudulent charge was reversed, and production was restored clean — in under four hours.",
   impact: [
     { label: "Unauthorised instances", value: "300+" },
-    { label: "Regions affected",       value: "Multiple" },
+    { label: "Regions affected",       value: "~All" },
     { label: "Fraudulent billing",     value: "$1,000" },
     { label: "Time to restore",        value: "4 hours" },
   ],
   timeline: [
-    { t: "T+00:00", state: "detected",  text: "Anomalous EC2 activity and billing spike identified." },
-    { t: "T+00:20", state: "contained", text: "Leaked IAM access keys revoked; blast radius scoped across regions." },
-    { t: "T+01:10", state: "mitigated", text: "300+ unauthorised EC2 instances identified and terminated." },
-    { t: "T+02:30", state: "mitigated", text: "$1,000 in fraudulent billing raised and disputed with AWS." },
-    { t: "T+04:00", state: "resolved",  text: "Production workloads restored. Access controls and key rotation policy tightened." },
+    { t: "T+00:00", state: "detected",  text: "AWS alert: IAM user suspended. Logged in to find 60–70 EC2 instances running across nearly every region — none of them mine." },
+    { t: "T+00:20", state: "contained", text: "Compromised IAM user removed. All credentials that could have been co-leaked revoked immediately. Stop the bleeding first." },
+    { t: "T+00:45", state: "contained", text: "Lambda-based kill switch deployed — swept every region in parallel to terminate rogue EC2 instances, security groups, auto-scaling groups and Elastic IPs." },
+    { t: "T+01:10", state: "mitigated", text: "300+ unauthorised instances terminated. CloudWatch monitored continuously to confirm no new resources were spinning up." },
+    { t: "T+02:00", state: "mitigated", text: "Account hardened — new password set, MFA enforced. Fresh infrastructure provisioned; zero trust in anything previously running." },
+    { t: "T+04:00", state: "resolved",  text: "All production workloads redeployed clean. AWS Support looped in to trace the incident. Every dollar of fraudulent billing subsequently reversed." },
   ],
-  followUp: "Rotated all credentials, enforced least-privilege IAM policies, and added billing and instance-count alerting so the same signal fires in minutes, not hours.",
+  followUp: "Deployed GuardDuty for automatic threat detection, AWS Config and Security Hub for consolidated cross-region visibility, and org-level Service Control Policies to contain blast radius the moment anomalous activity is detected. Billing and instance-count alerts now fire in minutes, not hours.",
   // Curve for the chart: [x 0-1, unauthorised instance count]
   curve: [[0,12],[0.12,14],[0.18,90],[0.24,240],[0.30,312],[0.46,318],[0.55,300],[0.68,180],[0.80,64],[0.92,18],[1,12]] as Array<[number, number]>,
 };
@@ -98,18 +100,29 @@ export const projects = [
       "Migrated frontend and backend from Contabo VPS to GCP while keeping the compute-heavy AI service on Contabo for cost efficiency.",
       "GCP-managed Load Balancer for backend traffic distribution, Cloudflare for CDN, DNS and security, centralised logging through Grafana Loki.",
     ],
-    tags: ["GCP", "Contabo", "Docker", "Redis", "Cloudflare", "Grafana Loki", "Python"],
+    tags: ["GCP", "MIG · Autoscaling", "Compute Engine", "Cloud Storage", "MongoDB Atlas", "Contabo VPS", "Docker", "Redis", "Grafana", "GitHub Actions", "GHCR", "birefnet"],
     diagram: {
       nodes: [
-        { id: "cf",   label: "Cloudflare",   host: "Edge · CDN, DNS, WAF" },
-        { id: "lb",   label: "Load Balancer", host: "GCP · managed" },
-        { id: "fe",   label: "Frontend",      host: "GCP · container" },
-        { id: "be",   label: "Backend API",   host: "GCP · container" },
-        { id: "redis",label: "Redis",         host: "GCP · container" },
-        { id: "ai",   label: "AI Service",    host: "Contabo · high-memory host" },
-        { id: "loki", label: "Grafana Loki",  host: "Centralised logging" },
+        { id: "users",    label: "End Users",       host: "Internet · HTTPS" },
+        { id: "lb",       label: "App Load Balancer",host: "GCP · External managed LB" },
+        { id: "fe",       label: "Frontend VM",      host: "GCP · Compute Engine" },
+        { id: "mig",      label: "Backend MIG",      host: "GCP · Managed Instance Group · autoscaling" },
+        { id: "mongo",    label: "MongoDB Atlas",    host: "External · managed DB" },
+        { id: "redis",    label: "Redis Cache",      host: "GCP · Dedicated Cache VM · internal VPC" },
+        { id: "storage",  label: "Cloud Storage",    host: "GCP · multi-region bucket" },
+        { id: "bgremove", label: "bgremove API",     host: "Contabo VPS · Docker container" },
+        { id: "worker",   label: "bgremove Worker",  host: "Contabo VPS · parallel workers" },
+        { id: "grafana",  label: "Grafana",          host: "Monitoring · metrics dashboard" },
+        { id: "github",   label: "GitHub Actions",   host: "CI/CD · build trigger" },
+        { id: "ghcr",     label: "GHCR",             host: "Container registry" },
       ],
-      edges: [["cf","lb"],["lb","fe"],["lb","be"],["be","redis"],["be","ai"],["fe","loki"],["be","loki"],["ai","loki"]],
+      edges: [
+        ["users","lb"],["lb","fe"],["lb","mig"],
+        ["mig","redis"],["mig","storage"],["mig","bgremove"],
+        ["fe","mongo"],["mig","mongo"],
+        ["bgremove","worker"],["worker","grafana"],["mig","grafana"],
+        ["github","ghcr"],["ghcr","mig"],
+      ],
     },
   },
   {
@@ -118,21 +131,22 @@ export const projects = [
     url: "",
     role: "Design and ownership",
     points: [
-      "Designed and implemented a standardised CI/CD pattern across 10+ client projects, each with a multi-repository structure (separate frontend and backend repos) and main/development/feature branch workflows.",
-      "Owned repository management end to end — created repositories and reviewed every pull request for deployment-readiness before merge.",
-      "Built reusable GitHub Actions workflows for automated Docker image builds and deployments, managing secrets and environment configuration independently per project.",
+      "Designed a standardised multi-repo CI/CD pattern used across 10+ client projects — separate frontend and backend repos, each with main/development/feature branching, reviewed and merged only on deployment-readiness.",
+      "Every pipeline follows the same contract: commit triggers build, automated checks gate the push to GHCR, deploy runs against the target environment, Docker healthcheck confirms liveness before traffic switches.",
+      "Secrets and environment config managed independently per project — no shared blast radius. Reusable GitHub Actions workflows cut pipeline setup time to under 30 minutes per new client repo.",
     ],
-    tags: ["GitHub Actions", "Docker", "GHCR", "GitOps"],
+    tags: ["GitHub Actions", "Docker", "GHCR", "GitOps", "Secrets Manager"],
     diagram: {
       nodes: [
         { id: "commit", label: "Commit",       host: "feature → development" },
         { id: "build",  label: "Build",        host: "GitHub Actions runner" },
-        { id: "test",   label: "Test",         host: "Automated checks" },
+        { id: "test",   label: "Lint & Test",  host: "Automated checks" },
         { id: "push",   label: "Push GHCR",    host: "Container registry" },
         { id: "deploy", label: "Deploy",       host: "Target environment" },
         { id: "health", label: "Health check", host: "Docker healthcheck" },
+        { id: "notify", label: "Notify",       host: "Slack / webhook" },
       ],
-      edges: [["commit","build"],["build","test"],["test","push"],["push","deploy"],["deploy","health"]],
+      edges: [["commit","build"],["build","test"],["test","push"],["push","deploy"],["deploy","health"],["health","notify"]],
     },
   },
 ];
@@ -150,4 +164,5 @@ export const nav = [
   { id: "incident",     index: "04", label: "INCIDENT REPORT" },
   { id: "architecture", index: "05", label: "ARCHITECTURE" },
   { id: "endpoints",    index: "06", label: "ENDPOINTS" },
+  { id: "contact",      index: "07", label: "CONTACT" },
 ];
