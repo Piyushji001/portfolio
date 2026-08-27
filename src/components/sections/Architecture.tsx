@@ -23,12 +23,41 @@ function highlightNumbers(text: string) {
   );
 }
 
-function hostname(url: string) {
-  try {
-    return new URL(url).hostname;
-  } catch {
-    return url;
-  }
+/** Status badge: green = operational, amber = in-progress, grey = planned */
+function StatusBadge({ status }: { status: (typeof projects)[number]["status"] }) {
+  const colorMap = {
+    operational:  "var(--ok)",
+    "in-progress": "var(--accent)",
+    planned:       "var(--fg-dim)",
+  } as const;
+
+  const labelMap = {
+    operational:  "OPERATIONAL",
+    "in-progress": "IN PROGRESS",
+    planned:       "PLANNED",
+  } as const;
+
+  const color = colorMap[status] ?? "var(--fg-dim)";
+  const label = labelMap[status] ?? status.toUpperCase();
+
+  return (
+    <span
+      className="inline-flex items-center gap-2"
+      aria-label={`Project status: ${label}`}
+    >
+      <span
+        aria-hidden="true"
+        className="inline-block h-[6px] w-[6px] shrink-0 rounded-full"
+        style={{ backgroundColor: color }}
+      />
+      <span
+        className="type-data text-[11px] uppercase tracking-[0.14em]"
+        style={{ color }}
+      >
+        {label}
+      </span>
+    </span>
+  );
 }
 
 function Details({ project }: { project: (typeof projects)[number] }) {
@@ -36,16 +65,44 @@ function Details({ project }: { project: (typeof projects)[number] }) {
 
   return (
     <div onMouseLeave={() => setHoveredTag(null)}>
+      {/* Section tags */}
+      <div className="flex flex-wrap gap-2">
+        {project.sectionTags.map((tag) => (
+          <span
+            key={tag}
+            className="type-data text-[10px] uppercase tracking-[0.16em]"
+            style={{
+              color: "var(--accent)",
+              border: "1px solid var(--hairline)",
+              padding: "3px 8px",
+              borderRadius: 2,
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
       <h3
-        className="type-data text-[28px] text-text"
+        className="type-data mt-4 text-[28px] text-text"
         style={{ fontWeight: 500, lineHeight: 1.15 }}
       >
         {project.name}
       </h3>
       <p className="type-data mt-2 text-[14px] text-text-dim">{project.tagline}</p>
-      <p className="type-data mt-3 text-[11px] uppercase tracking-[0.16em] text-text-dim">
-        {project.role}
-      </p>
+
+      {/* Status + role row */}
+      <div className="mt-3 flex flex-wrap items-center gap-3">
+        <StatusBadge status={project.status} />
+        <span
+          aria-hidden="true"
+          className="inline-block h-[11px] w-px"
+          style={{ backgroundColor: "var(--hairline)" }}
+        />
+        <p className="type-data text-[11px] uppercase tracking-[0.16em] text-text-dim">
+          {project.role}
+        </p>
+      </div>
 
       <ul className="mt-6 flex flex-col gap-4">
         {project.points.map((point) => (
@@ -93,25 +150,38 @@ function Details({ project }: { project: (typeof projects)[number] }) {
         })}
       </div>
 
-      {project.url !== "" && (
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="type-data mt-7 inline-flex items-center gap-2 text-[13px]"
-          style={{ color: "var(--accent)" }}
-        >
-          {hostname(project.url)}
-          <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-            <path
-              d="M2 8 L8 2 M4 2 H8 V6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-            />
-          </svg>
-        </a>
-      )}
+      {/* Links: live URL and/or repo */}
+      <div className="mt-7 flex flex-wrap gap-5">
+        {project.url !== "" && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="type-data inline-flex items-center gap-2 text-[13px]"
+            style={{ color: "var(--accent)" }}
+          >
+            {(() => {
+              try { return new URL(project.url).hostname; } catch { return project.url; }
+            })()}
+            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+              <path d="M2 8 L8 2 M4 2 H8 V6" fill="none" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </a>
+        )}
+        {project.repoUrl !== "" && (
+          <a
+            href={project.repoUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="type-data inline-flex items-center gap-2 text-[13px]"
+            style={{ color: "var(--text-dim)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--accent)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-dim)"; }}
+          >
+            REPO ↗
+          </a>
+        )}
+      </div>
     </div>
   );
 }

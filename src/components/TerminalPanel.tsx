@@ -67,7 +67,7 @@ export function TerminalPanel({
     if (cmd === "help") {
       out = HELP;
     } else if (cmd === "whoami") {
-      out = [{ text: "piyush sharma — devops engineer, jaipur, in" }];
+      out = [{ text: "piyush sharma — devops engineer" }];
     } else if (cmd === "ls") {
       out = [{ text: "overview  stack  experience  incident.log  projects  contact" }];
     } else if (cmd === "cat incident.log") {

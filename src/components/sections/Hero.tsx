@@ -8,14 +8,13 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const BOOT_LINES = [
   "> initialising control plane...",
   "> loading profile: piyush.sharma",
-  `> region: ${profile.location.toLowerCase()}`,
   "> status: OK",
 ];
 
 const HERO_COPY = {
   name: profile.name.toUpperCase(),
   role: profile.role.toUpperCase(),
-  disciplines: "MULTI-CLOUD · CI/CD · OBSERVABILITY",
+  disciplines: "KUBERNETES · CI/CD · DEVSECOPS · OBSERVABILITY",
   status: "ALL SYSTEMS OPERATIONAL",
   primary: "VIEW WORK",
   secondary: "RESUME.PDF",

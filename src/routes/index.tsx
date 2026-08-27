@@ -13,10 +13,11 @@ import { CommandPalette, PaletteHint } from "@/components/CommandPalette";
 import { Terminal } from "@/components/Terminal";
 import { CustomCursor } from "@/components/CustomCursor";
 import { MouseSpotlight } from "@/components/MouseSpotlight";
+import { CursorPing } from "@/components/CursorPing";
 
 const TITLE = "Piyush Sharma — DevOps Engineer";
 const DESCRIPTION =
-  "DevOps engineer in Jaipur. Multi-cloud infrastructure, CI/CD, Kubernetes and observability. Cut cloud spend 60% and recovered a compromised AWS account in four hours.";
+  "DevOps engineer. Multi-cloud infrastructure, CI/CD, Kubernetes and observability. Cut cloud spend 60% and recovered a compromised AWS account in four hours.";
 const OG_IMAGE =
   "https://project--d20c25b4-25fb-465a-b552-bf0a9de6bf55.lovable.app/og.png";
 
@@ -45,12 +46,6 @@ export const Route = createFileRoute("/")({
           name: profile.name,
           jobTitle: profile.role,
           email: `mailto:${profile.email}`,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Jaipur",
-            addressRegion: "Rajasthan",
-            addressCountry: "IN",
-          },
           sameAs: [profile.linkedin, profile.github].filter((u) => u !== ""),
         }),
       },
@@ -82,6 +77,7 @@ function Index() {
       <Terminal />
       <CustomCursor />
       <MouseSpotlight />
+      <CursorPing />
     </div>
   );
 }

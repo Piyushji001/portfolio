@@ -226,3 +226,25 @@ html.motion-off body {
   border-color: var(--accent) !important;
   background-color: rgba(242, 169, 59, 0.08) !important;
 }
+
+/* ── Cursor radar ping ────────────────────────────────────────── */
+@keyframes ping-expand {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 0.7;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
+
+.ping-ring {
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  animation: ping-expand 600ms var(--ease) forwards;
+  will-change: width, height, opacity;
+}
+
