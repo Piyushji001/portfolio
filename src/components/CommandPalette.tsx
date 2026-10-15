@@ -48,10 +48,7 @@ export function useCommands(): Command[] {
         label: "open resume",
         category: "FILE",
         run: () => {
-          const a = document.createElement("a");
-          a.href = profile.resumeUrl;
-          a.download = "";
-          a.click();
+          window.open(profile.resumeUrl, "_blank", "noopener,noreferrer");
         },
       },
       {

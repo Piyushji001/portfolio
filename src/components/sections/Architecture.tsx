@@ -150,9 +150,9 @@ function Details({ project }: { project: (typeof projects)[number] }) {
         })}
       </div>
 
-      {/* Links: live URL and/or repo */}
-      <div className="mt-7 flex flex-wrap gap-5">
-        {project.url !== "" && (
+      {/* Links: live URL */}
+      {project.url !== "" && (
+        <div className="mt-7 flex flex-wrap gap-5">
           <a
             href={project.url}
             target="_blank"
@@ -167,21 +167,8 @@ function Details({ project }: { project: (typeof projects)[number] }) {
               <path d="M2 8 L8 2 M4 2 H8 V6" fill="none" stroke="currentColor" strokeWidth="1" />
             </svg>
           </a>
-        )}
-        {project.repoUrl !== "" && (
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="type-data inline-flex items-center gap-2 text-[13px]"
-            style={{ color: "var(--text-dim)" }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--accent)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-dim)"; }}
-          >
-            REPO ↗
-          </a>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

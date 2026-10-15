@@ -187,7 +187,8 @@ export function Hero() {
             </a>
             <a
               href={profile.resumeUrl}
-              download
+              target="_blank"
+              rel="noreferrer noopener"
               className="type-data hover-glow inline-flex items-center border px-5 py-3 text-[13px] tracking-[0.1em] uppercase transition-colors duration-300"
               style={{
                 borderColor: "var(--hairline)",
