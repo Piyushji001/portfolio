@@ -1,15 +1,16 @@
 export const profile = {
   name: "Piyush Sharma",
   role: "DevOps Engineer",
-  experience: "1.7+ years",
+  experience: "~2 years",
   location: "",
   timezone: "Asia/Kolkata",
   careerStart: "2025-01-01",
+  phone: "+91-7691813348",
   email: "mr.piyush0270@gmail.com",
   linkedin: "https://www.linkedin.com/in/piyush-sharma-devops/",
   github: "https://github.com/Piyushji001",
   resumeUrl: "/Piyush_Sharma_DevOps_Engineer_Resume.pdf",
-  bio: "I build and run the infrastructure other people's products sit on. Multi-cloud across AWS, Azure and GCP, containerised with Docker and Kubernetes, shipped through CI/CD pipelines I design and own. I lead a small development team, run client-facing technical discussions, and I've cut a cloud bill by 60% and recovered a compromised AWS account in four hours.",
+  bio: "I own production infrastructure, CI/CD, and observability for multiple client applications across AWS, GCP, and Azure. Hands-on with Kubernetes, Terraform, Ansible, GitOps (ArgoCD), DevSecOps tooling, and LLM-driven AIOps automation. I've cut monthly cloud spend by ~60% through FinOps practices and led incident response for an AWS account compromise, restoring production in under 4 hours.",
 };
 
 export const metrics = [
@@ -20,17 +21,18 @@ export const metrics = [
 ];
 
 export const stack = [
-  { layer: "Cloud",         items: ["AWS (EC2, S3, RDS, Lambda, IAM)", "GCP (Compute Engine, Cloud Run, Load Balancer)", "Azure", "Contabo VPS", "Linode"] },
-  { layer: "Orchestration", items: ["Docker", "Kubernetes", "Helm", "ArgoCD"] },
-  { layer: "CI/CD",         items: ["GitHub Actions", "GitLab CI/CD", "Jenkins", "GitOps", "GHCR"] },
-  { layer: "IaC",           items: ["Terraform", "OpenTofu"] },
+  { layer: "Cloud",         items: ["AWS (EC2, S3, RDS, Lambda, IAM, EKS, Cost Explorer)", "GCP (GKE, Compute Engine, Cloud Run, Secret Manager, IAM)", "Azure (AKS, VMs, Blob Storage, Azure Monitor)", "Contabo VPS", "Linode"] },
+  { layer: "Orchestration", items: ["Docker", "Docker Compose", "Kubernetes (EKS, GKE, AKS)", "Helm", "ArgoCD"] },
+  { layer: "CI/CD",         items: ["GitHub Actions", "GitLab CI/CD", "Jenkins", "ArgoCD", "GitOps", "GHCR"] },
+  { layer: "IaC",           items: ["Terraform", "Ansible", "OpenTofu"] },
   { layer: "Observability", items: ["Prometheus", "Grafana", "Grafana Loki", "OpenTelemetry", "Alertmanager", "Structured logging", "Docker health checks"] },
-  { layer: "Network & Sec", items: ["NGINX", "Cloudflare", "UFW", "SSL/TLS", "Linux hardening", "Secrets management", "IAM & access controls"] },
+  { layer: "Network & Sec", items: ["NGINX", "Cloudflare (CDN, DNS, WAF)", "UFW", "SSL/TLS", "Linux hardening", "Secrets management", "IAM & access controls"] },
   { layer: "DevSecOps",     items: ["Trivy", "Syft (SBOM)", "Cosign / Sigstore", "Kyverno", "OPA", "GitHub OIDC"] },
+  { layer: "FinOps",        items: ["Cost Explorer", "Tagging strategies", "Budgets & billing alerts", "Rightsizing", "Reserved pricing", "Infracost"] },
   { layer: "Platform",      items: ["Backstage", "Crossplane", "OpenCost", "KEDA", "Karpenter"] },
-  { layer: "Runtime",       items: ["Python", "FastAPI", "Bash", "Node.js", "Express.js", "React", "JavaScript (ES6+)"] },
+  { layer: "Runtime",       items: ["Python", "FastAPI", "Bash", "JavaScript / TypeScript", "Node.js", "Express.js", "React"] },
   { layer: "Data",          items: ["MongoDB", "MySQL", "Redis"] },
-  { layer: "AI & AIOps",    items: ["LLM APIs (OpenAI / Anthropic)", "Ollama (self-hosted)", "AIOps / anomaly detection", "ChatOps", "AI-integrated CI/CD", "Automated PR review"] },
+  { layer: "AI & AIOps",    items: ["GPU model serving (Whisper, birefnet, CUDA)", "LLM APIs (OpenAI / Anthropic)", "Ollama (self-hosted)", "AIOps / anomaly detection", "ChatOps", "AI-integrated CI/CD", "Automated PR review", "Claude Code", "Copilot"] },
 ];
 
 export const experience = [
@@ -41,13 +43,12 @@ export const experience = [
     end: "Present",
     current: true,
     points: [
-      "Lead a development team — end-to-end delivery, code reviews and technical mentorship — while managing multi-cloud infrastructure across AWS, Azure, GCP and VPS environments.",
-      "Own client-facing engagement: requirement-gathering sessions, progress updates and technical discussions that align delivery with business objectives.",
-      "Cut cloud infrastructure billing by ~60% through resource rightsizing, reserved instance usage and eliminating idle compute.",
-      "Designed and maintained CI/CD pipelines (GitHub Actions, GitOps) and containerised applications with Docker under agile delivery practices.",
-      "Manage GitHub repositories, branching strategy (main/development/feature) and pull request reviews to enforce deployment-readiness.",
-      "Built the observability stack on Prometheus, Grafana and Grafana Loki — dashboards and alert rules that cut incident response time.",
-      "Hardened Linux servers: NGINX reverse proxy, UFW firewall policy, SSL/TLS termination, systemd service management.",
+      "Own production infrastructure and CI/CD for multiple client applications across AWS, GCP, Azure, and self-managed VPS — Terraform/Ansible provisioning, GitHub Actions and ArgoCD GitOps pipelines, monitoring, and incident response.",
+      "Drove FinOps: reduced monthly cloud billing by ~60% via Cost Explorer analysis, resource tagging for cost allocation, budgets and billing alerts, rightsizing, reserved/committed-use pricing, and decommissioning idle compute and unattached storage.",
+      "Built an observability stack (Prometheus, Grafana, Loki) — dashboards, centralised logging, and alerting.",
+      "Deployed OpenAI Whisper on a dedicated GPU server (Docker, CUDA) for multilingual voice-to-text transcription, exposed as an API consumed by the client's backend; added an LLM analysis stage that turns transcripts into structured reports.",
+      "Deployed a GPU-hosted image background-removal model as a containerised inference service with health checks and monitoring, routing backend requests to the GPU.",
+      "Led incident response to an AWS account compromise — terminated 300+ unauthorised EC2 instances across multiple regions, revoked leaked IAM access keys, and restored production within 4 hours; recovered ~$1,000 in fraudulent billing via AWS dispute and introduced IAM least-privilege, key rotation, and billing alerts to prevent recurrence.",
     ],
   },
   {
@@ -57,11 +58,8 @@ export const experience = [
     end: "Dec 2025",
     current: false,
     points: [
-      "Full-stack developer — designed frontend and backend architecture and shipped features end-to-end in React and Python/FastAPI.",
-      "Owned end-to-end deployment of client applications on GCP: Docker containerisation, NGINX reverse proxy, SSL/TLS termination, GitHub Actions CI/CD with Secrets Manager.",
-      "Standardised Git branching and release workflows across client repositories, reviewing every pull request for deployment readiness.",
-      "Built FastAPI backend services for client e-commerce platforms — product catalogues, order management, Razorpay payments — with JWT auth, RBAC and MongoDB.",
-      "Developed React dashboards against FastAPI backends, working the full lifecycle from code to production.",
+      "Owned deployment of client applications on GCP and AWS (EC2, S3, IAM): Docker containerisation, NGINX reverse proxy, SSL/TLS termination, Cloudflare DNS/Workers, and GitHub Actions CI/CD pipelines with Secret Manager for environment secrets.",
+      "Built and shipped Python/FastAPI backend services and React frontends for e-commerce clients through to production release, including JWT auth, RBAC on MongoDB, and payment integration.",
     ],
   },
 ];
@@ -170,21 +168,20 @@ export const projects = [
     url: "",
     repoUrl: "",
     status: "operational" as const,
-    sectionTags: ["OBSERVABILITY", "AIOPS", "MULTI-CLOUD"],
+    sectionTags: ["AIOPS", "MULTI-CLOUD"],
     role: "Architecture, implementation, AIOps control loop",
     points: [
-      "Provisioned Kubernetes clusters across clouds (GKE, with portable Terraform modules and a local kind mirror) and delivered workloads through Argo CD GitOps. Instrumented end-to-end with Prometheus, Grafana, Loki and OpenTelemetry for metrics, logs and traces.",
-      // TODO(piyush): confirm/replace with measured value once benchmarked
-      "Built an AIOps control loop that detects metric and log anomalies, uses an LLM for root-cause analysis, and triggers bounded auto-remediation — pod restarts, scaling and rollbacks — cutting mean-time-to-recovery (MTTR) by ~60% in load tests.",
+      "Multi-cloud Kubernetes (AWS EKS, Azure AKS) provisioned with Terraform, deployed via ArgoCD GitOps, instrumented with Prometheus, Grafana, Loki, and OpenTelemetry.",
+      "AIOps layer detects metric/log anomalies and uses an LLM for root-cause analysis to auto-remediate (pod restarts, scaling, rollbacks), cutting MTTR by ~60% in load tests.",
       "Remediation is least-privilege and rate-limited, and the LLM runs via API or a local Ollama model (no GPU footprint). Alertmanager routes incidents to the remediator and to a ChatOps channel.",
     ],
-    tags: ["Kubernetes", "GKE", "Terraform", "Argo CD", "Prometheus", "Grafana", "Loki", "OpenTelemetry", "Alertmanager", "Python", "Ollama / LLM", "GitOps"],
+    tags: ["Kubernetes", "AWS EKS", "Azure AKS", "Terraform", "Argo CD", "Prometheus", "Grafana", "Loki", "OpenTelemetry", "Alertmanager", "Python", "Ollama / LLM", "GitOps"],
     diagram: {
       nodes: [
         { id: "gitrepo",    label: "Git Repo",        host: "Source of truth · GitOps" },
         { id: "argocd",     label: "Argo CD",         host: "GitOps controller" },
-        { id: "gke",        label: "GKE Cluster",     host: "Google Kubernetes Engine" },
-        { id: "kind",       label: "kind (local)",    host: "Local Kubernetes mirror" },
+        { id: "eks",        label: "AWS EKS",         host: "Elastic Kubernetes Service" },
+        { id: "aks",        label: "Azure AKS",       host: "Azure Kubernetes Service" },
         { id: "workload",   label: "Backend Workload",host: "Application pods" },
         { id: "prometheus", label: "Prometheus",      host: "Metrics scraper" },
         { id: "loki",       label: "Loki",            host: "Log aggregator" },
@@ -196,8 +193,8 @@ export const projects = [
         { id: "k8sapi",     label: "Kubernetes API",  host: "Cluster control plane" },
       ],
       edges: [
-        ["gitrepo","argocd"],["argocd","gke"],["argocd","kind"],
-        ["gke","workload"],
+        ["gitrepo","argocd"],["argocd","eks"],["argocd","aks"],
+        ["eks","workload"],["aks","workload"],
         ["workload","prometheus"],["workload","loki"],["workload","otel"],
         ["prometheus","grafana"],["loki","grafana"],
         ["prometheus","alertmgr"],["alertmgr","remediator"],
@@ -285,6 +282,10 @@ export const projects = [
 export const education = [
   { degree: "Master of Computer Applications (MCA)", school: "CMR Institute of Technology", year: "2025", note: "CGPA 8.6" },
   { degree: "Bachelor of Computer Applications (BCA)", school: "Poddar International College", year: "2023", note: "65%" },
+];
+
+export const certifications = [
+  { name: "Oracle Cloud Infrastructure Certified Architect Associate", issuer: "Oracle" },
 ];
 
 export const nav = [
